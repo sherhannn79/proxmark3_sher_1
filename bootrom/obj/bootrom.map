@@ -1,0 +1,189 @@
+Archive member included to satisfy reference by file (symbol)
+
+m:/proxmark3/proxspace32/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1\libgcc.a(_thumb1_case_uqi.o)
+                              obj/bootrom.o (__gnu_thumb1_case_uqi)
+m:/proxmark3/proxspace32/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1\libgcc.a(_aeabi_ulcmp.o)
+                              obj/bootrom.o (__aeabi_ulcmp)
+
+Allocating common symbols
+Common symbol       size              file
+
+start_addr          0x4               obj/bootrom.o
+end_addr            0x4               obj/bootrom.o
+bootrom_unlocked    0x4               obj/bootrom.o
+
+Discarded input sections
+
+ .text          0x00000000        0x0 obj/version.o
+ .data          0x00000000        0x0 obj/version.o
+ .bss           0x00000000        0x0 obj/version.o
+ .text          0x00000000        0x0 obj/ram-reset.o
+ .data          0x00000000        0x0 obj/ram-reset.o
+ .bss           0x00000000        0x0 obj/ram-reset.o
+ .text          0x00000000        0x0 obj/flash-reset.o
+ .data          0x00000000        0x0 obj/flash-reset.o
+ .bss           0x00000000        0x0 obj/flash-reset.o
+ .data          0x00000000        0x0 obj/cmd.o
+ .bss           0x00000000        0x0 obj/cmd.o
+ .data          0x00000000        0x0 obj/bootrom.o
+ .bss           0x00000000        0x0 obj/bootrom.o
+ .data          0x00000000        0x0 m:/proxmark3/proxspace32/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1\libgcc.a(_thumb1_case_uqi.o)
+ .bss           0x00000000        0x0 m:/proxmark3/proxspace32/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1\libgcc.a(_thumb1_case_uqi.o)
+ .data          0x00000000        0x0 m:/proxmark3/proxspace32/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1\libgcc.a(_aeabi_ulcmp.o)
+ .bss           0x00000000        0x0 m:/proxmark3/proxspace32/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1\libgcc.a(_aeabi_ulcmp.o)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+bootphase1       0x00100000         0x00000200
+bootphase2       0x00100200         0x00001e00
+osimage          0x00102000         0x0003e000
+ram              0x00200000         0x0000ffe0
+commonarea       0x0020ffe0         0x00000020
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+                0x001001fc                _bootphase1_version_pointer = ((ORIGIN (bootphase1) + LENGTH (bootphase1)) - 0x4)
+                0x00102000                _osimage_entry = ORIGIN (osimage)
+                0x00100000                _bootrom_start = ORIGIN (bootphase1)
+                0x00102000                _bootrom_end = (ORIGIN (bootphase2) + LENGTH (bootphase2))
+                0x00100000                _flash_start = ORIGIN (bootphase1)
+                0x00140000                _flash_end = (ORIGIN (osimage) + LENGTH (osimage))
+                0x0020ffd8                _stack_end = ((ORIGIN (ram) + LENGTH (ram)) - 0x8)
+
+.bootphase1     0x00100000      0x200
+ *(.startup)
+ .startup       0x00100000       0x70 obj/flash-reset.o
+                0x00100000                flashstart
+                0x00100070                . = ALIGN (0x4)
+                0x00100070                _version_information_start = .
+ *(.version_information)
+ .version_information
+                0x00100070       0x57 obj/version.o
+                0x00100070                version_information
+                0x000001fc                . = (LENGTH (bootphase1) - 0x4)
+ *fill*         0x001000c7      0x135 
+                0x001001fc        0x4 LONG 0x100070 _version_information_start
+
+.vfp11_veneer   0x00100200        0x0
+ .vfp11_veneer  0x00100200        0x0 linker stubs
+
+.v4_bx          0x00100200        0x0
+ .v4_bx         0x00100200        0x0 linker stubs
+
+.iplt           0x00100200        0x0
+ .iplt          0x00100200        0x0 obj/ram-reset.o
+
+.igot.plt       0x00100200        0x0
+ .igot.plt      0x00100200        0x0 obj/ram-reset.o
+
+.rel.dyn        0x00100200        0x0
+ .rel.iplt      0x00100200        0x0 obj/ram-reset.o
+
+.bootphase2     0x00200000      0xc7c load address 0x00100200
+ *(.startphase2)
+ .startphase2   0x00200000        0xc obj/ram-reset.o
+                0x00200000                ram_start
+ *(.text)
+ .text          0x0020000c       0x98 obj/cmd.o
+                0x0020000c                cmd_receive
+                0x00200034                cmd_send
+ .text          0x002000a4      0x6a8 obj/usb_cdc.o
+                0x00200156                getStringDescriptor
+                0x0020016c                usb_disable
+                0x00200190                usb_enable
+                0x002001e8                AT91F_USB_SendZlp
+                0x0020022c                AT91F_USB_SendStall
+                0x00200270                AT91F_CDC_Enumerate
+                0x00200530                usb_check
+                0x00200584                usb_poll
+                0x002005a8                usb_poll_validate_length
+                0x002005d4                usb_read
+                0x00200658                usb_write
+ .text          0x0020074c      0x438 obj/bootrom.o
+                0x0020074c                DbpString
+                0x00200772                UsbPacketReceived
+                0x00200a48                BootROM
+ .text          0x00200b84       0x14 m:/proxmark3/proxspace32/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1\libgcc.a(_thumb1_case_uqi.o)
+                0x00200b84                __gnu_thumb1_case_uqi
+ .text          0x00200b98       0x24 m:/proxmark3/proxspace32/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1\libgcc.a(_aeabi_ulcmp.o)
+                0x00200b98                __aeabi_ulcmp
+ *fill*         0x00200bbc        0x4 
+ .text.__stub   0x00200bc0       0x14 linker stubs
+ *(.text.*)
+ *(.eh_frame)
+ *(.glue_7)
+ .glue_7        0x00200bd8        0x0 linker stubs
+ *(.glue_7t)
+ .glue_7t       0x00200bd8        0x0 linker stubs
+ *(.rodata)
+ .rodata        0x00200bd8       0x93 obj/usb_cdc.o
+ *(.rodata.*)
+ *(.data)
+ *fill*         0x00200c6b        0x1 
+ .data          0x00200c6c        0xd obj/usb_cdc.o
+                0x00200c6c                pUdp
+                0x00200c70                line
+                0x00200c78                btReceiveBank
+ *(.data.*)
+                0x00200c7c                . = ALIGN (0x4)
+ *fill*         0x00200c79        0x3 
+                0x00100200                __bootphase2_src_start__ = LOADADDR (.bootphase2)
+                0x00200000                __bootphase2_start__ = ADDR (.bootphase2)
+                0x00200c7c                __bootphase2_end__ = (__bootphase2_start__ + SIZEOF (.bootphase2))
+
+.bss            0x00200c7c      0x1a0
+                0x00200c7c                __bss_start__ = .
+ *(.bss)
+ .bss           0x00200c7c      0x194 obj/usb_cdc.o
+                0x00200c7c                btConfiguration
+                0x00200c7d                btConnection
+                0x00200c7e                csrIdx
+                0x00200c80                csrTab
+ *(.bss.*)
+                0x00200e10                . = ALIGN (0x4)
+                0x00200e10                __bss_end__ = .
+ COMMON         0x00200e10        0xc obj/bootrom.o
+                0x00200e10                start_addr
+                0x00200e14                end_addr
+                0x00200e18                bootrom_unlocked
+
+.commonarea     0x0020ffe0        0xf
+ *(.commonarea)
+ .commonarea    0x0020ffe0        0xf obj/bootrom.o
+                0x0020ffe0                common_area
+LOAD obj/version.o
+LOAD obj/ram-reset.o
+LOAD obj/flash-reset.o
+LOAD obj/cmd.o
+LOAD obj/usb_cdc.o
+LOAD obj/bootrom.o
+LOAD m:/proxmark3/proxspace32/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1\libgcc.a
+OUTPUT(obj/bootrom.elf elf32-littlearm)
+
+.comment        0x00000000       0x76
+ .comment       0x00000000       0x76 obj/version.o
+                                 0x77 (size before relaxing)
+ .comment       0x00000076       0x77 obj/cmd.o
+ .comment       0x00000076       0x77 obj/usb_cdc.o
+ .comment       0x00000076       0x77 obj/bootrom.o
+
+.ARM.attributes
+                0x00000000       0x2e
+ .ARM.attributes
+                0x00000000       0x30 obj/version.o
+ .ARM.attributes
+                0x00000030       0x1a obj/ram-reset.o
+ .ARM.attributes
+                0x0000004a       0x1a obj/flash-reset.o
+ .ARM.attributes
+                0x00000064       0x2a obj/cmd.o
+ .ARM.attributes
+                0x0000008e       0x2a obj/usb_cdc.o
+ .ARM.attributes
+                0x000000b8       0x2a obj/bootrom.o
+ .ARM.attributes
+                0x000000e2       0x1c m:/proxmark3/proxspace32/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1\libgcc.a(_thumb1_case_uqi.o)
+ .ARM.attributes
+                0x000000fe       0x1c m:/proxmark3/proxspace32/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1\libgcc.a(_aeabi_ulcmp.o)
